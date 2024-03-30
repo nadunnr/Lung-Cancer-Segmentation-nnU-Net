@@ -101,12 +101,10 @@ def main():
 
         # CSV file of scores for all scans.
         file_name = str(input_config_preds.split('/')[4]) + "_results.csv"
-        current_directory = os.getcwd()
-        results_path = os.path.join(current_directory,'/result_scores/')
         out_path = os.path.join(results_path, file_name)
         results.to_csv(out_path)
 
-    print('Succesfully evaluated!')
+    print("Succesfully evaluated!")
 
 if __name__ == "__main__":
     main()
