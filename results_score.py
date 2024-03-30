@@ -18,7 +18,7 @@ path_2d = 'D:/ScholarX/nnU-Net/Results/2d/190/nnUNetTrainerASSDLoss/gamma_0.0/'
 path_3dfullres = 'D:/ScholarX/nnU-Net/Results/3dfullres/190/nnUNetTrainerASSDLoss/gamma_0.0/'
 path_3dlowres = 'D:/ScholarX/nnU-Net/Results/3dlowres/190/nnUNetTrainerASSDLoss/gamma_0.0/'
 path_groundtruth = 'D:/ScholarX/nnU-Net/nnUNet_raw/Dataset001_LungCancer/labelsTs/'
-results = "D:/ScholarX/nnU-Net/" 
+results_path = "D:/ScholarX/nnU-Net/" 
 
 def score(labels_seg_path, pred_list):
 
@@ -68,7 +68,7 @@ def score(labels_seg_path, pred_list):
 def main():
     """Main function."""
     #add path to the predicted segmentation files of the required configuration
-    input_config_preds = path_2d
+    input_config_preds = path_3dlowres
 
     preds = glob.glob('%s/*.nii.gz'%(input_config_preds))
     labels = glob.glob('%s/*.nii.gz'%(path_groundtruth))
@@ -96,8 +96,8 @@ def main():
     results.loc["75quantile"] = results.quantile(q=0.75)
 
     # CSV file of scores for all scans.
-    file_name = input_config_preds.split('/')[4] + "_results.csv"
-    out_path = os.path.join(results, file_name)
+    file_name = str(input_config_preds.split('/')[4]) + "_results.csv"
+    out_path = os.path.join(results_path, file_name)
     results.to_csv(out_path)
 
 if __name__ == "__main__":
