@@ -1,6 +1,4 @@
-import sys
 import os
-import time
 import pandas as pd
 # import utils
 import nibabel as nib
