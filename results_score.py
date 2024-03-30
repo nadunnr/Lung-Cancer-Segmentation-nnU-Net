@@ -1,21 +1,23 @@
-#!/usr/bin/env python3
 import sys
 import os
-import subprocess
-import argparse
-import json
 import time
 import pandas as pd
 # import utils
 import nibabel as nib
 from medpy.metric import dc, assd
 import numpy as np
-from skimage.segmentation import find_boundaries
 import glob
 
 MAX_VALUE_ASSD = 350 #mm
 DEBBUGING =  False
 
+
+#add corresponding paths
+#segmentation_path = 'D:/ScholarX/nnU-Net/Results/'
+path_2d = 'D:/ScholarX/nnU-Net/Results/2d/190/nnUNetTrainerASSDLoss/gamma_0.0/'
+path_3dfullres = 'D:/ScholarX/nnU-Net/Results/3dfullres/190/nnUNetTrainerASSDLoss/gamma_0.0/'
+path_3dlowres = 'D:/ScholarX/nnU-Net/Results/3dlowres/190/nnUNetTrainerASSDLoss/gamma_0.0/'
+path_groundtruth = 'D:\ScholarX\nnU-Net\Results\labelsTs'
 
 def score(parent, pred_lst, tmp_output="tmp.csv"):
     """Compute and return scores for each scan."""
@@ -25,19 +27,23 @@ def score(parent, pred_lst, tmp_output="tmp.csv"):
         'tumour_Dice':[],
         'tumour_ASSD':[],
         }
+    
     for pred in pred_lst:
-        start = time.process_time()
+        #start = time.process_time()
         scan_id = os.path.basename(pred)[-15:-7]
         gold = os.path.join(parent, f"{scan_id}.nii.gz")
+
         # try:
         print(scan_id)
         df_metric['scan_id'].append(scan_id)
+
         #run_captk(captk_path, pred, gold, tmp_output)
         gt_array = np.round(nib.load(gold).get_fdata())
         pred_array = nib.load(pred).get_fdata()
         # Voxel spacing
         affine = nib.load(gold).affine
-        vxlspacing = [abs(affine[k, k]) for k in range(3)]
+        voxel_spacing = [abs(affine[k, k]) for k in range(3)]
+
         # whole tumour VS 
         gt_VS = (gt_array == 1).astype(int) 
         pred_VS = (pred_array == 1).astype(int) 
@@ -48,7 +54,7 @@ def score(parent, pred_lst, tmp_output="tmp.csv"):
             df_metric['tumour_ASSD'].append(10)
         else:
             if np.sum(pred_VS) > 0:
-                df_metric['tumour_ASSD'].append(assd(pred_VS, gt_VS, voxelspacing=vxlspacing))
+                df_metric['tumour_ASSD'].append(assd(pred_VS, gt_VS, voxelspacing=voxel_spacing))
             else:
                 df_metric['tumour_ASSD'].append(MAX_VALUE_ASSD)
 
@@ -87,8 +93,6 @@ def main():
     results.loc["25quantile"] = results.quantile(q=0.25)
     results.loc["75quantile"] = results.quantile(q=0.75)
 
-    # CSV file of scores for all scans.
-    results.to_csv("./CSV_files/%s_%s_%s_all_scores.csv"%(sys.argv[1].split('/')[-3],sys.argv[2].split('/')[-3],sys.argv[1].split('/')[-2]))
 
 
 if __name__ == "__main__":
