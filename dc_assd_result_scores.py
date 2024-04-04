@@ -3,7 +3,7 @@ import pandas as pd
 # import utils
 import nibabel as nib
 
-from medpy.metric import dc, assd
+from medpy.metric import dc, assd, hd
 #I had to change "Path to python\Lib\site-packages\medpy\metric\binary.py" script to get it run.
 #Try these changes in above file if this gives this error "FutureWarning: In the future `np.bool` will be defined as the corresponding NumPy scalar."
 #If this error happens, "`np.bool` was a deprecated alias for the builtin `bool`."
@@ -32,6 +32,7 @@ def score(labels_seg_path, pred_list):
         'scan_id':[],
         'tumour_Dice':[],
         'tumour_ASSD':[],
+        'tumour_HousdroffD': []
         }
     
     for pred in pred_list:
@@ -65,6 +66,8 @@ def score(labels_seg_path, pred_list):
                 df_metric['tumour_ASSD'].append(assd(pred_VS, label_VS, voxelspacing=voxel_spacing))
             else:
                 df_metric['tumour_ASSD'].append(MAX_VALUE_ASSD)
+
+        df_metric['tumour_HousdroffD'].append(hd(pred_VS, label_VS, voxelspacing=voxel_spacing))
 
     return pd.DataFrame.from_dict(df_metric).set_index('scan_id')   #.sort_values(by="")
 
