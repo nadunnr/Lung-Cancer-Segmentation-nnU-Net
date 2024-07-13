@@ -1,4 +1,4 @@
-dataset_preparation\CT_lungs.ipynb
-readme.docx
-~$readme.docx
-model_training.py
+/dataset_preparation/CT_lungs.ipynb
+/readme.docx
+/~$readme.docx
+/model_training.py
