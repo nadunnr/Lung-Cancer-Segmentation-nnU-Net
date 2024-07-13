@@ -24,7 +24,7 @@ The dataset was split into 62 training and 15 testing cases following nnU-Net gu
 The nnU-Net framework trained models using the preprocessed data across the three configurations. These models then predicted tumor segmentations for the test set CT images.
 
 ## Results
-The models trained on 2D, 3D low resolution (3D lowres), and 3D full resolution (3D fullres) configurations were evaluated using Dice Score, average symmetric surface distance (ASSD), and Hausdorff distance. The 2D model performed poorly, often failing to predict segmentations, resulting in the lowest mean Dice Score (0.38) and the highest mean ASSD (68.64) and Hausdorff distance (182.42). Among the 3D models, the 3D lowres model outperformed the 3D fullres model, achieving the highest mean Dice Score (0.62), the lowest mean ASSD (8.78), and the lowest mean Hausdorff distance (31.48), making it the most effective configuration for segmentation in this study.
+The models trained on 2D, 3D low resolution (3D lowres), and 3D full resolution (3D fullres) configurations were evaluated using Dice Score, average symmetric surface distance (ASSD), and Hausdorff distance. The 2D model performed poorly, often failing to predict segmentations, resulting in the lowest mean Dice Score (0.38) and the highest mean ASSD (68.64) and Hausdorff distance (182.42). Among the 3D models, the 3D lowres model outperformed the 3D fullres model, achieving the highest mean Dice Score (0.62), the lowest mean ASSD (8.78), and the lowest mean Hausdorff distance (31.48), making it the most effective configuration for segmentation in this work.
 
 Qualitative visualization of two cases from the testing set shows ground truth tumor segmentations alongside those predicted by the models trained with 2D, 3D low resolution (3D lowres), and 3D full resolution (3D fullres) configurations.
 
@@ -41,7 +41,7 @@ Qualitative visualization of two cases from the testing set shows ground truth t
 
 ### Model Training
 1. Set up the local PC to run nnU-Net as mentioned in the [nnU-Net installation instructions](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md).
-2. Prepare the dataset according to the file structure described in the [nnU-Net dataset format documentation](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_format.md). The `dataset_preparation/dataset.json` file has been created manually.
+2. Prepare the dataset according to the file structure described in the [nnU-Net dataset format documentation](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_format.md). The `dataset_preparation/dataset.json` file that should be created under nnU-Net_raw has been created manually.
 3. Train the models using the instructions in the [nnU-Net usage documentation](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/how_to_use_nnunet.md). The `model_training.ipynb` notebook was used to train the models on a cluster.
 
 ### Evaluation
