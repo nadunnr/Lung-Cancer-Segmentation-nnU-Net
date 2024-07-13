@@ -18,7 +18,7 @@ The original dataset had 96 CT images, but 19 were excluded due to errors, leavi
 The nnU-Net framework, known for its autonomous configuration capabilities in medical image segmentation, was used. It automates data preprocessing, network architecture determination, training procedures, and post-processing.
 
 ****nnU-Net github repository****
- [https://github.com/MIC-DKFZ/nnUNet](https://github.com/MIC-DKFZ/nnUNet)
+ [github.com/MIC-DKFZ/nnUNet](https://github.com/MIC-DKFZ/nnUNet)
 
 ### Data Preprocessing
 The dataset was split into 62 training and 15 testing cases following nnU-Net guidelines. Data was arranged into specific sub-directories, and preprocessing provided three U-Net configurations: 2D, 3D low resolution, and 3D full resolution.
