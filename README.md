@@ -8,7 +8,7 @@ This repository contains work related to preparing a dataset and training models
 ### CT Acquisition
 The work utilized the NSCLC Radiogenomics dataset, which comprises CT and PET/CT images of 211 subjects with Non-Small Cell Lung Cancer (NSCLC). The dataset included semantic annotations and segmentation maps, but only the CT images were used in this study to integrate with transcriptome expression levels and understand tumor heterogeneity.
 
-****Model Training****
+****Dataset****
 The NSCLC Radiogenomics dataset is available at: [https://www.cancerimagingarchive.net/collection/nsclc-radiogenomics/](https://www.cancerimagingarchive.net/collection/nsclc-radiogenomics/)
 
 ### Dataset Preparation
