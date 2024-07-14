@@ -1,4 +1,4 @@
-# Lung Cancer Segmentation using nnU-Net
+# Lung CT Cancer Segmentation using nnU-Net
 
 ## Overview
 This repository contains work related to preparing a dataset and training models for lung cancer segmentation using the NSCLC Radiogenomics dataset. The nnU-Net framework was utilized for model training.
